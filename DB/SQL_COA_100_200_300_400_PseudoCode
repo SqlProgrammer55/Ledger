@@ -1,0 +1,1023 @@
+
+CREATE VIEW 120_Investment_Income AS
+SELECT SUM(IncomeAMT) AS Total_Investment_Income
+FROM (
+  SELECT IncomeAMT FROM 121_Income_from_U.S._Government_Obligations_
+  UNION ALL
+  SELECT IncomeAMT FROM 122_Income_from_Federal_Agency_Securities
+  UNION ALL
+  SELECT IncomeAMT FROM 123_Income_from_Investment_in_NCUSIF
+  UNION ALL
+  SELECT IncomeAMT FROM 124_Interest_on_Trading_Securities
+  UNION ALL
+  SELECT IncomeAMT FROM 125_Income_from_Common_Trust_Investments
+  UNION ALL
+  SELECT IncomeAMT FROM 126_Income_from_Shares/Deposits/Certificates_of_Corporate_Credit_Unions_
+  UNION ALL
+  SELECT IncomeAMT FROM 127_Income_from_Shares/Deposits/Certificates_of_Other_Credit_Unions_
+  UNION ALL
+  SELECT IncomeAMT FROM 128_Income_from_Other_Shares/Deposits/Certificates
+  UNION ALL
+  SELECT IncomeAMT FROM 128.1_Income_from_Investments_in_Credit_Union_Service_Corporations_(CUSO)_
+  UNION ALL
+  SELECT IncomeAMT FROM 129_Income_from_Other_Investments
+) AS Total_Income;
+
+-- Inserting a new value for table 120_Investment_Income
+INSERT INTO 120_Investment_Income (IncomeAMT, Date)
+VALUES (15000.00, '2023-02-21');
+
+-- Updating an existing value for table 121_Income_from_U.S._Government_Obligations_
+UPDATE 121_Income_from_U.S._Government_Obligations_
+SET IncomeAMT = 20000.00
+WHERE Date = '2022-12-31';
+
+-- Inserting a new value for table 122_Income_from_Federal_Agency_Securities
+INSERT INTO 122_Income_from_Federal_Agency_Securities (IncomeAMT, Date)
+VALUES (8000.00, '2023-02-21');
+
+-- Updating an existing value for table 123_Income_from_Investment_in_NCUSIF
+UPDATE 123_Income_from_Investment_in_NCUSIF
+SET IncomeAMT = 5000.00
+WHERE Date = '2022-12-31';
+
+-- Inserting a new value for table 124_Interest_on_Trading_Securities
+INSERT INTO 124_Interest_on_Trading_Securities (IncomeAMT, Date)
+VALUES (7000.00, '2023-02-21');
+
+-- Updating an existing value for table 125_Income_from_Common_Trust_Investments
+UPDATE 125_Income_from_Common_Trust_Investments
+SET IncomeAMT = 12000.00
+WHERE Date = '2022-12-31';
+
+-- Inserting a new value for table 126_Income_from_Shares/Deposits/Certificates_of_Corporate_Credit_Unions_
+INSERT INTO 126_Income_from_Shares/Deposits/Certificates_of_Corporate_Credit_Unions_ (IncomeAMT, Date)
+VALUES (5000.00, '2023-02-21');
+
+-- Updating an existing value for table 127_Income_from_Shares/Deposits/Certificates_of_Other_Credit_Unions_
+UPDATE 127_Income_from_Shares/Deposits/Certificates_of_Other_Credit_Unions_
+SET IncomeAMT = 10000.00
+WHERE Date = '2022-12-31';
+
+-- Inserting a new value for table 128_Income_from_Other_Shares/Deposits/Certificates
+INSERT INTO 128_Income_from_Other_Shares/Deposits/Certificates (IncomeAMT, Date)
+VALUES (6000.00, '2023-02-21');
+
+-- Updating an existing value for table 128.1_Income_from_Investments_in_Credit_Union_Service_Corporations_(CUSO)_
+UPDATE 128.1_Income_from_Investments_in_Credit_Union_Service_Corporations_(CUSO)_
+SET IncomeAMT = 4000.00
+WHERE Date = '2022-12-31';
+
+-- Inserting a new value for table 129_Income_from_Other_Investments
+INSERT INTO 129_Income_from_Other_Investments (IncomeAMT, Date)
+VALUES (9000.00, '2023-02-21');
+
+CREATE VIEW 130_Fees_and_Charges AS 
+SELECT SUM(FeeAMT) AS TotalFees 
+FROM (
+  SELECT FeeAMT FROM 131_OtherFees_and_Charges 
+  UNION ALL 
+  SELECT FeeAMT FROM 132_Loan_Origination_Fees
+) AS FeesAndCharges;
+
+
+INSERT INTO 131_OtherFees_and_Charges (FeeID, FeeAMT) 
+VALUES (1, 100.00), (2, 50.00), (3, 25.00);
+
+UPDATE 131_OtherFees_and_Charges 
+SET FeeAMT = 75.00 
+WHERE FeeID = 2;
+
+INSERT INTO 132_Loan_Origination_Fees (FeeID, FeeAMT) 
+VALUES (1, 200.00), (2, 150.00), (3, 75.00);
+
+UPDATE 132_Loan_Origination_Fees 
+SET FeeAMT = FeeAMT * 1.1 
+WHERE FeeID = 1;
+
+
+
+CREATE VIEW 140_Gain_(Loss)_on_Sale_of_Loans_and_Other_Eligible_Obligations AS
+SELECT SUM(Gain_Loss) AS Total_Gain_Loss
+FROM 141_Gain_(Loss)_on_Sale_of_Eligible_Obligations;
+
+INSERT INTO 141_Gain_(Loss)_on_Sale_of_Eligible_Obligations (Gain_Loss, Date)
+VALUES (1000, '2023-02-01'),
+       (-500, '2023-02-02'),
+       (750, '2023-02-03');
+
+UPDATE 141_Gain_(Loss)_on_Sale_of_Eligible_Obligations
+SET Gain_Loss = 1500,
+    Date = '2023-02-04'
+WHERE Gain_Loss = 1000;
+
+UPDATE 141_Gain_(Loss)_on_Sale_of_Eligible_Obligations
+SET Gain_Loss = -1000,
+    Date = '2023-02-05'
+WHERE Gain_Loss = -500;
+
+CREATE VIEW 150_Miscellaneous_Operating_Income AS
+SELECT SUM(MiscIncome) AS TotalMiscIncome
+FROM 151_Other_Miscellaneous_Operating_Income;
+
+
+INSERT INTO 151_Other_Miscellaneous_Operating_Income (MiscIncome, Date) 
+VALUES (1000, '2022-01-01'), (1500, '2022-02-15');
+
+UPDATE 151_Other_Miscellaneous_Operating_Income 
+SET MiscIncome = 2000, Date = '2022-03-01' 
+WHERE MiscIncome = 1000;
+
+UPDATE 151_Other_Miscellaneous_Operating_Income 
+SET MiscIncome = 2500, Date = '2022-04-15' 
+WHERE MiscIncome = 1500;
+
+
+CREATE VIEW 160_Service_Income_on_Loans_and_Other_Obligations AS
+SELECT SUM(IncomeAMT) AS TotalIncome
+FROM (
+  SELECT IncomeAMT FROM 161_Service_Income_on_Loans_and_Other_Obligations
+  UNION ALL
+  SELECT IncomeAMT FROM 162_Service_Income_on_Credit_Card_Loans
+  UNION ALL
+  SELECT IncomeAMT FROM 163_Service_Income_Net_Commitment_Fees
+) AS IncomeTable;
+
+
+-- Insert code for 161_Service_Income_on_Loans_and_Other_Obligations
+INSERT INTO 161_Service_Income_on_Loans_and_Other_Obligations (IncomeAMT, Date)
+VALUES (1000, '2023-02-21');
+
+-- Update code for 161_Service_Income_on_Loans_and_Other_Obligations
+UPDATE 161_Service_Income_on_Loans_and_Other_Obligations
+SET IncomeAMT = 1500, Date = '2023-02-22'
+WHERE IncomeID = 1;
+
+-- Insert code for 162_Service_Income_on_Credit_Card_Loans
+INSERT INTO 162_Service_Income_on_Credit_Card_Loans (IncomeAMT, Date)
+VALUES (2000, '2023-02-21');
+
+-- Update code for 162_Service_Income_on_Credit_Card_Loans
+UPDATE 162_Service_Income_on_Credit_Card_Loans
+SET IncomeAMT = 2500, Date = '2023-02-22'
+WHERE IncomeID = 1;
+
+-- Insert code for 163_Service_Income_Net_Commitment_Fees
+INSERT INTO 163_Service_Income_Net_Commitment_Fees (IncomeAMT, Date)
+VALUES (3000, '2023-02-21');
+
+-- Update code for 163_Service_Income_Net_Commitment_Fees
+UPDATE 163_Service_Income_Net_Commitment_Fees
+SET IncomeAMT = 3500, Date = '2023-02-22'
+WHERE IncomeID = 1;
+
+
+CREATE VIEW 170_Trading_Profits_and_Losses AS
+SELECT SUM(ProfitLossAMT) AS Total_Profit_Loss
+FROM 171_Trading_Profits_and_Losses;
+
+UPDATE 171_Trading_Profits_and_Losses
+SET ProfitLossAMT = 1000, Date = '2022-12-31'
+WHERE Symbol = 'AAPL';
+
+INSERT INTO 171_Trading_Profits_and_Losses (ProfitLossAMT, Date) 
+VALUES (500, '2022-01-01');
+
+
+
+CREATE VIEW "200_Operating_Expenses_(Control)" AS
+SELECT SUM("ExpensesAMT") AS total_expenses
+FROM (
+    SELECT "ExpensesAMT" FROM "210_Compensation"
+    UNION ALL
+    SELECT "ExpensesAMT" FROM "211_Salaries"
+    UNION ALL
+    SELECT "ExpensesAMT" FROM "212_Reimbursement_to_Sponsor_for_Services"
+    UNION ALL
+    SELECT "ExpensesAMT" FROM "219_Other_Compensation"
+) AS all_expenses;
+
+-- Insert a new record into 210_Compensation with ExpensesAMT and Date fields
+INSERT INTO "210_Compensation" ("ExpensesAMT", "Date") VALUES (1500, '2023-02-20');
+
+-- Update the ExpensesAMT and Date fields for an existing record in 210_Compensation table
+UPDATE "210_Compensation" SET "ExpensesAMT" = 2000, "Date" = '2023-02-21' WHERE "id" = 1;
+
+-- Insert a new record into 211_Salaries with ExpensesAMT and Date fields
+INSERT INTO "211_Salaries" ("ExpensesAMT", "Date") VALUES (3000, '2023-02-22');
+
+-- Update the ExpensesAMT and Date fields for an existing record in 211_Salaries table
+UPDATE "211_Salaries" SET "ExpensesAMT" = 4000, "Date" = '2023-02-23' WHERE "id" = 2;
+
+-- Insert a new record into 212_Reimbursement_to_Sponsor_for_Services with ExpensesAMT and Date fields
+INSERT INTO "212_Reimbursement_to_Sponsor_for_Services" ("ExpensesAMT", "Date") VALUES (5000, '2023-02-24');
+
+-- Update the ExpensesAMT and Date fields for an existing record in 212_Reimbursement_to_Sponsor_for_Services table
+UPDATE "212_Reimbursement_to_Sponsor_for_Services" SET "ExpensesAMT" = 6000, "Date" = '2023-02-25' WHERE "id" = 3;
+
+-- Insert a new record into 219_Other_Compensation with ExpensesAMT and Date fields
+INSERT INTO "219_Other_Compensation" ("ExpensesAMT", "Date") VALUES (7000, '2023-02-26');
+
+-- Update the ExpensesAMT and Date fields for an existing record in 219_Other_Compensation table
+UPDATE "219_Other_Compensation" SET "ExpensesAMT" = 8000, "Date" = '2023-02-27' WHERE "id" = 4;
+
+
+
+CREATE VIEW "220_Employee_Benefits" AS
+SELECT SUM(IncomeAMT) AS TotalBenefits
+FROM (
+  SELECT IncomeAMT FROM "222_Social_Security_Taxes_(Employer's_Share)"
+  UNION ALL
+  SELECT IncomeAMT FROM "223_Unemployment_Compensation_Taxes"
+  UNION ALL
+  SELECT IncomeAMT FROM "224_Other_Employee_Benefits"
+) AS AllBenefits;
+
+-- Inserting a new record with BenefitAMT and Date
+INSERT INTO "222_Social_Security_Taxes_(Employer's_Share)" (BenefitAMT, Date) VALUES (10000.00, '2023-02-21');
+
+-- Updating an existing record with new BenefitAMT and Date
+UPDATE "222_Social_Security_Taxes_(Employer's_Share)" SET BenefitAMT = 12000.00, Date = '2023-02-21' WHERE ID = 12345;
+
+-- Inserting a new record with BenefitAMT and Date
+INSERT INTO "223_Unemployment_Compensation_Taxes" (BenefitAMT, Date) VALUES (5000.00, '2023-02-21');
+
+-- Updating an existing record with new BenefitAMT and Date
+UPDATE "223_Unemployment_Compensation_Taxes" SET BenefitAMT = 6000.00, Date = '2023-02-21' WHERE ID = 12345;
+
+-- Inserting a new record with BenefitAMT and Date
+INSERT INTO "224_Other_Employee_Benefits" (BenefitAMT, Date) VALUES (2500.00, '2023-02-21');
+
+-- Updating an existing record with new BenefitAMT and Date
+UPDATE "224_Other_Employee_Benefits" SET BenefitAMT = 3000.00, Date = '2023-02-21' WHERE ID = 12345;
+
+
+CREATE VIEW 160_Service_Income_on_Loans_and_Other_Obligations AS
+SELECT SUM(TrvConfExpensesAMT) AS TotalTrvConfExpenses
+FROM (
+  SELECT TrvConfExpensesAMT FROM 231_Employees_Travel_and_Conference_Expenses
+  UNION ALL
+  SELECT TrvConfExpensesAMT FROM 232_Officers_and_Directors_Travel_and_Conference_Expenses
+  UNION ALL
+  SELECT TrvConfExpensesAMT FROM 239_Other_Travel_Expenses
+) AS AllTrvConfExpenses;
+
+
+-- Inserting data into the 231_Employees_Travel_and_Conference_Expenses table
+INSERT INTO 231_Employees_Travel_and_Conference_Expenses (TrvConfExpensesAMT, Date)
+VALUES (1000.00, '2022-01-01');
+
+-- Inserting data into the 232_Officers_and_Directors_Travel_and_Conference_Expenses table
+INSERT INTO 232_Officers_and_Directors_Travel_and_Conference_Expenses (TrvConfExpensesAMT, Date)
+VALUES (1500.00, '2022-01-02');
+
+-- Inserting data into the 239_Other_Travel_Expenses table
+INSERT INTO 239_Other_Travel_Expenses (TrvConfExpensesAMT, Date)
+VALUES (500.00, '2022-01-03');
+
+
+-- Updating data in the 231_Employees_Travel_and_Conference_Expenses table
+UPDATE 231_Employees_Travel_and_Conference_Expenses
+SET TrvConfExpensesAMT = 2000.00, Date = '2022-02-01'
+WHERE TrvConfExpensesAMT = 1000.00;
+
+-- Updating data in the 232_Officers_and_Directors_Travel_and_Conference_Expenses table
+UPDATE 232_Officers_and_Directors_Travel_and_Conference_Expenses
+SET TrvConfExpensesAMT = 2500.00, Date = '2022-02-02'
+WHERE TrvConfExpensesAMT = 1500.00;
+
+-- Updating data in the 239_Other_Travel_Expenses table
+UPDATE 239_Other_Travel_Expenses
+SET TrvConfExpensesAMT = 800.00, Date = '2022-02-03'
+WHERE TrvConfExpensesAMT = 500.00;
+
+
+CREATE VIEW 240_Association_Dues AS
+SELECT SUM(AssociationDuesAMT) AS TotalDues
+FROM (
+    SELECT AssociationDuesAMT FROM 241_Association_Dues
+) AS Dues;
+
+-- Insert a new row with AssociationDuesAMT = 100 and Date = '2023-02-21'
+INSERT INTO 241_Association_Dues (AssociationDuesAMT, Date)
+VALUES (100, '2023-02-21');
+
+-- Update the AssociationDuesAMT field to 150 for the row with Date = '2022-12-31'
+UPDATE 241_Association_Dues
+SET AssociationDuesAMT = 150
+WHERE Date = '2022-12-31';
+
+
+CREATE VIEW 250_Office_Occupancy_Expenses AS
+SELECT SUM(OfficeOccExpensesAMT) AS TotalOccExpenses
+FROM (
+  SELECT OfficeOccExpensesAMT FROM 251_Rent
+  UNION ALL
+  SELECT OfficeOccExpensesAMT FROM 252_Maintenance_of_Buildings
+  UNION ALL
+  SELECT OfficeOccExpensesAMT FROM 253_Utilities
+  UNION ALL
+  SELECT OfficeOccExpensesAMT FROM 254_Depreciation_of_Buildings
+  UNION ALL
+  SELECT OfficeOccExpensesAMT FROM 255_Amortization_of_Leasehold_Improvements
+  UNION ALL
+  SELECT OfficeOccExpensesAMT FROM 256_Real_Estate_Taxes
+  UNION ALL
+  SELECT OfficeOccExpensesAMT FROM 257_Depreciation_Expense_Leased_Assets
+  UNION ALL
+  SELECT OfficeOccExpensesAMT FROM 259_Other_Office_Occupancy_Expenses
+) AS AllExpenses;
+
+
+-- Insert statement for 251_Rent
+INSERT INTO 251_Rent (OfficeOccExpensesAMT, Date)
+VALUES (1000, '2023-02-21');
+
+-- Update statement for 251_Rent
+UPDATE 251_Rent
+SET OfficeOccExpensesAMT = 2000,
+    Date = '2023-02-22'
+WHERE id = 1;
+
+-- Insert statement for 252_Maintenance_of_Buildings
+INSERT INTO 252_Maintenance_of_Buildings (OfficeOccExpensesAMT, Date)
+VALUES (1500, '2023-02-23');
+
+-- Update statement for 252_Maintenance_of_Buildings
+UPDATE 252_Maintenance_of_Buildings
+SET OfficeOccExpensesAMT = 2500,
+    Date = '2023-02-24'
+WHERE id = 1;
+
+-- Insert statement for 253_Utilities
+INSERT INTO 253_Utilities (OfficeOccExpensesAMT, Date)
+VALUES (2000, '2023-02-25');
+
+-- Update statement for 253_Utilities
+UPDATE 253_Utilities
+SET OfficeOccExpensesAMT = 3000,
+    Date = '2023-02-26'
+WHERE id = 1;
+
+-- Insert statement for 254_Depreciation_of_Buildings
+INSERT INTO 254_Depreciation_of_Buildings (OfficeOccExpensesAMT, Date)
+VALUES (2500, '2023-02-27');
+
+-- Update statement for 254_Depreciation_of_Buildings
+UPDATE 254_Depreciation_of_Buildings
+SET OfficeOccExpensesAMT = 3500,
+    Date = '2023-02-28'
+WHERE id = 1;
+
+-- Insert statement for 255_Amortization_of_Leasehold_Improvements
+INSERT INTO 255_Amortization_of_Leasehold_Improvements (OfficeOccExpensesAMT, Date)
+VALUES (3000, '2023-03-01');
+
+-- Update statement for 255_Amortization_of_Leasehold_Improvements
+UPDATE 255_Amortization_of_Leasehold_Improvements
+SET OfficeOccExpensesAMT = 4000,
+    Date = '2023-03-02'
+WHERE id = 1;
+
+
+-- Insert statement for 256_Real_Estate_Taxes
+INSERT INTO 256_Real_Estate_Taxes (OfficeOccExpensesAMT, Date)
+VALUES (3500, '2023-03-03');
+
+-- Update statement for 256_Real_Estate_Taxes
+UPDATE 256_Real_Estate_Taxes
+SET OfficeOccExpensesAMT = 4500,
+    Date = '2023-03-04'
+WHERE id = 1;
+
+-- Insert statement for 257_Depreciation_Expense_Leased_Assets
+INSERT INTO 257_Depreciation_Expense_Leased_Assets (OfficeOccExpensesAMT, Date)
+VALUES (4000, '2023-03-05');
+
+-- Update statement for 257_Depreciation_Expense_Leased_Assets
+UPDATE 257_Depreciation_Expense_Leased_Assets
+SET OfficeOccExpensesAMT = 5000,
+    Date = '2023-03-06'
+WHERE id = 1;
+
+-- Insert statement for 259_Other_Office_Occupancy_Expenses
+INSERT INTO 259_Other_Office_Occupancy_Expenses (OfficeOccExpensesAMT, Date)
+VALUES (4500, '2023-03-07');
+
+-- Update statement for 259_Other_Office_Occupancy_Expenses
+UPDATE 259_Other_Office_Occupancy_Expenses
+SET OfficeOccExpensesAMT = 5500,
+    Date = '2023-03-08'
+WHERE id = 1;
+
+
+CREATE VIEW 260_Office_Operations_Expenses AS 
+SELECT SUM(OfficeOpExpensesAMT) AS TotalOfficeOpExpenses 
+FROM 
+(
+  SELECT OfficeOpExpensesAMT FROM 261_Communications
+  UNION ALL
+  SELECT OfficeOpExpensesAMT FROM 262_Rental_of_Furniture_and_Equipment
+  UNION ALL
+  SELECT OfficeOpExpensesAMT FROM 263_Maintenance_of_Furniture_and_Equipment
+  UNION ALL
+  SELECT OfficeOpExpensesAMT FROM 264_Stationery_and_Supplies
+  UNION ALL
+  SELECT OfficeOpExpensesAMT FROM 265_Insurance
+  UNION ALL
+  SELECT OfficeOpExpensesAMT FROM 266_Depreciation_of_Furniture_and_Equipment
+  UNION ALL
+  SELECT OfficeOpExpensesAMT FROM 268_Bank_Service_Charges
+  UNION ALL
+  SELECT OfficeOpExpensesAMT FROM 269_Other_Office_Operations_Expenses
+) AS TotalOfficeOpExpenses;
+
+
+-- Insert and update code for 261_Communications table
+-- Insert a new row
+INSERT INTO 261_Communications (OfficeOpExpensesAMT, Date)
+VALUES (500, '2022-01-01');
+
+-- Update an existing row
+UPDATE 261_Communications
+SET OfficeOpExpensesAMT = 750, Date = '2022-02-01'
+WHERE CommunicationID = 1;
+
+-- Insert and update code for 262_Rental_of_Furniture_and_Equipment table
+-- Insert a new row
+INSERT INTO 262_Rental_of_Furniture_and_Equipment (OfficeOpExpensesAMT, Date)
+VALUES (1000, '2022-01-01');
+
+-- Update an existing row
+UPDATE 262_Rental_of_Furniture_and_Equipment
+SET OfficeOpExpensesAMT = 1500, Date = '2022-02-01'
+WHERE RentalID = 1;
+
+-- Insert and update code for 263_Maintenance_of_Furniture_and_Equipment table
+-- Insert a new row
+INSERT INTO 263_Maintenance_of_Furniture_and_Equipment (OfficeOpExpensesAMT, Date)
+VALUES (750, '2022-01-01');
+
+-- Update an existing row
+UPDATE 263_Maintenance_of_Furniture_and_Equipment
+SET OfficeOpExpensesAMT = 1000, Date = '2022-02-01'
+WHERE MaintenanceID = 1;
+
+-- Insert and update code for 264_Stationery_and_Supplies table
+-- Insert a new row
+INSERT INTO 264_Stationery_and_Supplies (OfficeOpExpensesAMT, Date)
+VALUES (250, '2022-01-01');
+
+-- Update an existing row
+UPDATE 264_Stationery_and_Supplies
+SET OfficeOpExpensesAMT = 500, Date = '2022-02-01'
+WHERE StationeryID = 1;
+
+-- Insert and update code for 265_Insurance table
+-- Insert a new row
+INSERT INTO 265_Insurance (OfficeOpExpensesAMT, Date)
+VALUES (1500, '2022-01-01');
+
+-- Update an existing row
+UPDATE 265_Insurance
+SET OfficeOpExpensesAMT = 2000, Date = '2022-02-01'
+WHERE InsuranceID = 1;
+
+-- Insert and update code for 266_Depreciation_of_Furniture_and_Equipment table
+-- Insert a new row
+INSERT INTO 266_Depreciation_of_Furniture_and_Equipment (OfficeOpExpensesAMT, Date)
+VALUES (500, '2022-01-01');
+
+-- Update an existing row
+UPDATE 266_Depreciation_of_Furniture_and_Equipment
+SET OfficeOpExpensesAMT = 750, Date = '2022-02-01'
+WHERE DepreciationID = 1;
+
+-- Insert and update code for 268_Bank_Service_Charges table
+-- Insert a new row
+INSERT INTO 268_Bank_Service_Charges (OfficeOpExpensesAMT, Date)
+VALUES (100, '2022-01-01');
+
+-- Update an existing row
+UPDATE 268_Bank_Service_Charges
+SET OfficeOpExpensesAMT = 250, Date = '2022-02-01'
+WHERE ServiceChargeID = 1;
+
+-- Insert and update code for 269_Other_Office_Operations_Expenses table
+-- Insert a new row
+INSERT INTO 269_Other_Office_Operations_Expenses (OfficeOpExpensesAMT, Date)
+VALUES (750, '2022-01-01');
+
+-- Update an existing row
+UPDATE 269_Other_Office_Operations_Expenses
+SET OfficeOpExpensesAMT = 1000, Date = '2022-02-01'
+WHERE OtherOpExpID = 1;
+
+
+CREATE VIEW 270_Educational_and_Promotional_Expenses AS
+SELECT SUM(EduPromoExpensesAMT) AS Total_EduPromo_Expenses
+FROM (
+   SELECT EduPromoExpensesAMT FROM 271_Advertising
+   UNION ALL
+   SELECT EduPromoExpensesAMT FROM 272_Publicity_and_Promotions
+   UNION ALL
+   SELECT EduPromoExpensesAMT FROM 279_Other_Educational_and_Promotional_Expenses
+) AS All_EduPromo_Expenses;
+
+
+INSERT INTO 271_Advertising (EduPromoExpensesAMT, Date)
+VALUES (1000, '2023-02-21');
+
+UPDATE 271_Advertising
+SET EduPromoExpensesAMT = 1500, Date = '2023-02-22'
+WHERE id = 1; -- replace id with the actual ID of the row you want to update
+
+INSERT INTO 272_Publicity_and_Promotions (EduPromoExpensesAMT, Date)
+VALUES (2000, '2023-02-21');
+
+UPDATE 272_Publicity_and_Promotions
+SET EduPromoExpensesAMT = 2500, Date = '2023-02-22'
+WHERE id = 1; -- replace id with the actual ID of the row you want to update
+
+INSERT INTO 279_Other_Educational_and_Promotional_Expenses (EduPromoExpensesAMT, Date)
+VALUES (3000, '2023-02-21');
+
+UPDATE 279_Other_Educational_and_Promotional_Expenses
+SET EduPromoExpensesAMT = 3500, Date = '2023-02-22'
+WHERE id = 1; -- replace id with the actual ID of the row you want to update
+
+
+CREATE VIEW 280_Loan_Servicing_Expenses AS
+SELECT SUM(LoanServExpensesAMT) as TotalExpenses
+FROM (
+    SELECT LoanServExpensesAMT FROM 282_Collection_Expenses
+    UNION ALL
+    SELECT LoanServExpensesAMT FROM 283_Recording_Fees—Chattel_Lien_Insurance
+    UNION ALL
+    SELECT LoanServExpensesAMT FROM 284_Credit_Reports
+    UNION ALL
+    SELECT LoanServExpensesAMT FROM 285_Refunds—Real_Estate_Service_Charges
+    UNION ALL
+    SELECT LoanServExpensesAMT FROM 286_Credit_Card_Program_Expenses
+    UNION ALL
+    SELECT LoanServExpensesAMT FROM 289_Other_Loan_Servicing_Expenses
+) AS AllExpenses;
+
+
+INSERT INTO 282_Collection_Expenses (LoanServExpensesAMT, Date)
+VALUES (1000.00, '2022-01-01');
+
+UPDATE 282_Collection_Expenses
+SET LoanServExpensesAMT = 1500.00
+WHERE ID = 1;
+
+
+INSERT INTO 283_Recording_Fees—Chattel_Lien_Insurance (LoanServExpensesAMT, Date)
+VALUES (500.00, '2022-01-15');
+
+UPDATE 283_Recording_Fees—Chattel_Lien_Insurance
+SET LoanServExpensesAMT = 750.00
+WHERE ID = 1;
+
+
+INSERT INTO 284_Credit_Reports (LoanServExpensesAMT, Date)
+VALUES (250.00, '2022-02-01');
+
+UPDATE 284_Credit_Reports
+SET LoanServExpensesAMT = 300.00
+WHERE ID = 1;
+
+INSERT INTO 285_Refunds—Real_Estate_Service_Charges (LoanServExpensesAMT, Date)
+VALUES (100.00, '2022-02-15');
+
+
+UPDATE 285_Refunds—Real_Estate_Service_Charges
+SET LoanServExpensesAMT = 150.00
+WHERE ID = 1;
+
+INSERT INTO 286_Credit_Card_Program_Expenses (LoanServExpensesAMT, Date)
+VALUES (50.00, '2022-03-01');
+
+UPDATE 286_Credit_Card_Program_Expenses
+SET LoanServExpensesAMT = 75.00
+WHERE ID = 1;
+
+
+INSERT INTO 289_Other_Loan_Servicing_Expenses (LoanServExpensesAMT, Date)
+VALUES (300.00, '2023-02-21');
+
+
+UPDATE 289_Other_Loan_Servicing_Expenses
+SET LoanServExpensesAMT = 400.00
+WHERE ID = 1;
+
+
+
+CREATE VIEW "290_Professional_and_Outside_Services" AS
+SELECT SUM("ProfOutServAMT") AS total_amount
+FROM (
+  SELECT "ProfOutServAMT" FROM "291_Legal_Fees"
+  UNION ALL
+  SELECT "ProfOutServAMT" FROM "292_Audit_Fees"
+  UNION ALL
+  SELECT "ProfOutServAMT" FROM "293_Accounting_Services"
+  UNION ALL
+  SELECT "ProfOutServAMT" FROM "294_Management_Consulting_Fees_"
+  UNION ALL
+  SELECT "ProfOutServAMT" FROM "299_Other_Professional_and_Outside_Services"
+) AS prof_out_serv;
+
+INSERT INTO "291_Legal_Fees" ("ProfOutServAMT", "Date") 
+VALUES (1000, '2022-01-01');
+
+INSERT INTO "292_Audit_Fees" ("ProfOutServAMT", "Date") 
+VALUES (2000, '2022-01-01');
+
+INSERT INTO "293_Accounting_Services" ("ProfOutServAMT", "Date") 
+VALUES (3000, '2022-01-01');
+
+INSERT INTO "294_Management_Consulting_Fees_" ("ProfOutServAMT", "Date") 
+VALUES (4000, '2022-01-01');
+
+INSERT INTO "299_Other_Professional_and_Outside_Services" ("ProfOutServAMT", "Date") 
+VALUES (5000, '2022-01-01');
+
+UPDATE "291_Legal_Fees"
+SET "ProfOutServAMT" = 1500, "Date" = '2022-02-01'
+WHERE "id" = 1;
+
+UPDATE "292_Audit_Fees"
+SET "ProfOutServAMT" = 2500, "Date" = '2022-02-01'
+WHERE "id" = 1;
+
+UPDATE "293_Accounting_Services"
+SET "ProfOutServAMT" = 3500, "Date" = '2022-02-01'
+WHERE "id" = 1;
+
+UPDATE "294_Management_Consulting_Fees_"
+SET "ProfOutServAMT" = 4500, "Date" = '2022-02-01'
+WHERE "id" = 1;
+
+UPDATE "299_Other_Professional_and_Outside_Services"
+SET "ProfOutServAMT" = 5500, "Date" = '2022-02-01'
+WHERE "id" = 1;
+
+
+CREATE VIEW 300_Provision_for_Loan_Losses AS
+SELECT SUM(ProvLoanLossesAMT) as TotalProvLoanLossesAMT
+FROM 
+(
+    SELECT ProvLoanLossesAMT FROM 301_Provision_for_Loan_Losses_Consumer_Loans
+    UNION ALL
+    SELECT ProvLoanLossesAMT FROM 302_Provision_for_Loan_Losses_Lines_of_Credit
+    UNION ALL
+    SELECT ProvLoanLossesAMT FROM 303_Provision_for_Loan_Losses_Real_Estate_Loans
+    UNION ALL
+    SELECT ProvLoanLossesAMT FROM 304_Provision_for_Loan_Losses_Mobile_Home_Loans
+    UNION ALL
+    SELECT ProvLoanLossesAMT FROM 305_Provision_for_Loan_Losses_Other_Loans
+    UNION ALL
+    SELECT ProvLoanLossesAMT FROM 306_Provision_for_Unrealized_Mutual_Fund_Losses
+    UNION ALL
+    SELECT ProvLoanLossesAMT FROM 309_Other_Provision_for_Losses
+) as CombinedProvLoanLosses;
+
+INSERT INTO 301_Provision_for_Loan_Losses_Consumer_Loans (ProvLoanLossesAMT, Date)
+VALUES (1000.00, '2023-02-21');
+
+INSERT INTO 302_Provision_for_Loan_Losses_Lines_of_Credit (ProvLoanLossesAMT, Date)
+VALUES (500.00, '2023-02-21');
+
+INSERT INTO 303_Provision_for_Loan_Losses_Real_Estate_Loans (ProvLoanLossesAMT, Date)
+VALUES (1500.00, '2023-02-21');
+
+INSERT INTO 304_Provision_for_Loan_Losses_Mobile_Home_Loans (ProvLoanLossesAMT, Date)
+VALUES (750.00, '2023-02-21');
+
+INSERT INTO 305_Provision_for_Loan_Losses_Other_Loans (ProvLoanLossesAMT, Date)
+VALUES (250.00, '2023-02-21');
+
+INSERT INTO 306_Provision_for_Unrealized_Mutual_Fund_Losses (ProvLoanLossesAMT, Date)
+VALUES (2000.00, '2023-02-21');
+
+INSERT INTO 309_Other_Provision_for_Losses (ProvLoanLossesAMT, Date)
+VALUES (100.00, '2023-02-21');
+
+
+UPDATE 301_Provision_for_Loan_Losses_Consumer_Loans
+SET ProvLoanLossesAMT = 1500.00, Date = '2023-02-22'
+WHERE id = 1;
+
+UPDATE 302_Provision_for_Loan_Losses_Lines_of_Credit
+SET ProvLoanLossesAMT = 2000.00, Date = '2023-02-22'
+WHERE id = 2;
+
+UPDATE 303_Provision_for_Loan_Losses_Real_Estate_Loans
+SET ProvLoanLossesAMT = 2500.00, Date = '2023-02-22'
+WHERE id = 3;
+
+UPDATE 304_Provision_for_Loan_Losses_Mobile_Home_Loans
+SET ProvLoanLossesAMT = 1000.00, Date = '2023-02-22'
+WHERE id = 4;
+
+UPDATE 305_Provision_for_Loan_Losses_Other_Loans
+SET ProvLoanLossesAMT = 500.00, Date = '2023-02-22'
+WHERE id = 5;
+
+UPDATE 306_Provision_for_Unrealized_Mutual_Fund_Losses
+SET ProvLoanLossesAMT = 3000.00, Date = '2023-02-22'
+WHERE id = 6;
+
+UPDATE 309_Other_Provision_for_Losses
+SET ProvLoanLossesAMT = 200.00, Date = '2023-02-22'
+WHERE id = 7;
+
+
+
+CREATE VIEW 310_Members'_Insurance AS
+SELECT SUM(MemberInsAMT) AS TotalInsurance
+FROM (
+  SELECT MemberInsAMT FROM 311_Share_Insurance
+  UNION ALL
+  SELECT MemberInsAMT FROM 312_Life_Savings_Insurance
+  UNION ALL
+  SELECT MemberInsAMT FROM 313_Borrowers'_Insurance
+  UNION ALL
+  SELECT MemberInsAMT FROM 319_Other_Members'_Insurance
+) AS AllInsurance;
+
+
+
+--Inserting data into 311_Share_Insurance
+INSERT INTO 311_Share_Insurance (MemberInsAMT, Date) VALUES (1000, '2023-02-21');
+
+--Updating data in 311_Share_Insurance
+UPDATE 311_Share_Insurance SET MemberInsAMT = 1500 WHERE Date = '2023-02-21';
+
+--Inserting data into 312_Life_Savings_Insurance
+INSERT INTO 312_Life_Savings_Insurance (MemberInsAMT, Date) VALUES (2000, '2023-02-21');
+
+--Updating data in 312_Life_Savings_Insurance
+UPDATE 312_Life_Savings_Insurance SET MemberInsAMT = 2500 WHERE Date = '2023-02-21';
+
+--Inserting data into 313_Borrowers'_Insurance
+INSERT INTO 313_Borrowers'_Insurance (MemberInsAMT, Date) VALUES (3000, '2023-02-21');
+
+--Updating data in 313_Borrowers'_Insurance
+UPDATE 313_Borrowers'_Insurance SET MemberInsAMT = 3500 WHERE Date = '2023-02-21';
+
+--Inserting data into 319_Other_Members'_Insurance
+INSERT INTO 319_Other_Members'_Insurance (MemberInsAMT, Date) VALUES (4000, '2023-02-21');
+
+--Updating data in 319_Other_Members'_Insurance
+UPDATE 319_Other_Members'_Insurance SET MemberInsAMT = 4500 WHERE Date = '2023-02-21';
+
+
+CREATE VIEW 320_Federal_Operating_Fee AS
+SELECT SUM(FedOpFeeAMT) AS Total_FedOpFeeAMT
+FROM 321_Federal_Operating_Fee;
+
+INSERT INTO 321_Federal_Operating_Fee (FedOpFeeAMT, Date) VALUES (1000, '2023-02-22');
+
+UPDATE 321_Federal_Operating_Fee SET FedOpFeeAMT = 1500, Date = '2023-02-23' WHERE id = 1;
+
+
+CREATE VIEW 330_Cash_Over_and_Short AS
+SELECT SUM(CashOverShortAMT) AS TotalCashOverShort
+FROM 331_Cash_Over_and_Short;
+
+INSERT INTO 331_Cash_Over_and_Short (CashOverShortAMT) VALUES (100.00);
+
+UPDATE 331_Cash_Over_and_Short 
+SET CashOverShortAMT = 200.00, Date = '2023-02-22'
+WHERE id = 1;
+
+
+
+CREATE VIEW 340_Interest_on_Borrowed_Money AS
+SELECT SUM(IntOnBorrowedMoneyAMT) AS TotalInterest
+FROM (
+    SELECT IntOnBorrowedMoneyAMT FROM 341_Imputed_Interest_Costs
+    UNION ALL
+    SELECT IntOnBorrowedMoneyAMT FROM 342_Other_Interest_on_Borrowed_Money
+) AS InterestTables;
+
+
+INSERT INTO 341_Imputed_Interest_Costs (IntOnBorrowedMoneyAMT, Date)
+VALUES (500, '2022-01-01');
+
+UPDATE 341_Imputed_Interest_Costs
+SET IntOnBorrowedMoneyAMT = 750, Date = '2022-02-01'
+WHERE Id = 1;
+
+
+INSERT INTO 342_Other_Interest_on_Borrowed_Money (IntOnBorrowedMoneyAMT, Date)
+VALUES (1000, '2022-03-01');
+
+UPDATE 342_Other_Interest_on_Borrowed_Money
+SET IntOnBorrowedMoneyAMT = 1250, Date = '2022-04-01'
+WHERE Id = 1;
+
+
+CREATE VIEW 350_Annual_Meeting_Expenses AS
+SELECT SUM(AnnualMeetExpAMT) AS TotalExpense
+FROM 351_Annual_Meeting_Expenses;
+
+
+-- Insert a new value into the AnnualMeetExpAMT field
+INSERT INTO 351_Annual_Meeting_Expenses (AnnualMeetExpAMT)
+VALUES (5000);
+
+-- Update the Date field for a specific record
+UPDATE 351_Annual_Meeting_Expenses
+SET Date = '2022-02-22'
+WHERE ID = 1;
+
+
+CREATE VIEW "360_Truth_in_Lending_Expense_(TIL)" AS
+SELECT SUM("TILAMT") AS "Total_TILAMT"
+FROM (
+     SELECT "TILAMT" FROM "361_TIL_Reimbursement_of_Interest_Overcharges"
+    UNION ALL
+    SELECT "TILAMT" FROM "362_TIL_Restitution"
+) AS TIL_SUMMARY;
+
+
+
+
+-- Insert into 361_TIL_Reimbursement_of_Interest_Overcharges
+INSERT INTO "361_TIL_Reimbursement_of_Interest_Overcharges" ("TILAMT", "Date")
+VALUES (200, '2022-01-02');
+
+-- Insert into 362_TIL_Restitution
+INSERT INTO "362_TIL_Restitution" ("TILAMT", "Date")
+VALUES (300, '2022-01-03');
+
+
+-- Update 361_TIL_Reimbursement_of_Interest_Overcharges
+UPDATE "361_TIL_Reimbursement_of_Interest_Overcharges"
+SET "TILAMT" = 250, "Date" = '2022-02-02'
+WHERE "TILAMT" = 200;
+
+-- Update 362_TIL_Restitution
+UPDATE "362_TIL_Restitution"
+SET "TILAMT" = 350, "Date" = '2022-02-03'
+WHERE "TILAMT" = 300;
+
+
+CREATE VIEW 370_Miscellaneous_Operating_Expenses AS
+SELECT SUM(MiscOpsExpAMT) AS total_misc_ops_expenses
+FROM (
+  SELECT MiscOpsExpAMT FROM 371_Unexercised_Commitment_Fees
+  UNION ALL
+  SELECT MiscOpsExpAMT FROM 372_Commitment_Fees_on_Borrowed_Money
+) AS misc_ops_expenses;
+
+
+-- Insert a new row into 371_Unexercised_Commitment_Fees
+INSERT INTO 371_Unexercised_Commitment_Fees (MiscOpsExpAMT, Date)
+VALUES (100.50, '2022-02-22');
+
+-- Insert a new row into 372_Commitment_Fees_on_Borrowed_Money
+INSERT INTO 372_Commitment_Fees_on_Borrowed_Money (MiscOpsExpAMT, Date)
+VALUES (200.75, '2022-02-23');
+
+-- Update the MiscOpsExpAMT and Date fields for an existing row in 371_Unexercised_Commitment_Fees
+UPDATE 371_Unexercised_Commitment_Fees
+SET MiscOpsExpAMT = 300.25, Date = '2022-02-24'
+WHERE id = 1;
+
+-- Update the MiscOpsExpAMT and Date fields for an existing row in 372_Commitment_Fees_on_Borrowed_Money
+UPDATE 372_Commitment_Fees_on_Borrowed_Money
+SET MiscOpsExpAMT = 400.50, Date = '2022-02-25'
+WHERE id = 2;
+
+CREATE VIEW 380_Dividend_Expenses AS
+SELECT SUM(DivExpAMT) AS Total_DivExpAMT
+FROM 
+(
+    SELECT DivExpAMT FROM "381.1_Regular_Share_Dividend_Expense"
+    UNION ALL
+    SELECT DivExpAMT FROM "380.2_Share_Draft_Dividend_Expense"
+    UNION ALL
+    SELECT DivExpAMT FROM "380.3_Club_Account_Dividend_Expense"
+    UNION ALL
+    SELECT DivExpAMT FROM "380.4_IRA/Keogh_Dividend_Expense"
+    UNION ALL
+    SELECT DivExpAMT FROM "380.5_Share_Certificate_Dividend_Expense"
+    UNION ALL
+    SELECT DivExpAMT FROM "380.6_Money_Market_Dividend_Expense"
+    UNION ALL
+    SELECT DivExpAMT FROM "380.7_Other_Dividend_Expense"
+    UNION ALL
+    SELECT DivExpAMT FROM "385_Interest_on_Deposits"
+) AS All_DivExpAMT;
+
+
+-- Inserting a record in 381.1_Regular_Share_Dividend_Expense table
+INSERT INTO "381.1_Regular_Share_Dividend_Expense" (DivExpAMT, Date) VALUES (100, '2023-02-22');
+
+-- Updating a record in 381.1_Regular_Share_Dividend_Expense table
+UPDATE "381.1_Regular_Share_Dividend_Expense" SET DivExpAMT = 200 WHERE DivExpAMT = 100;
+
+-- Inserting a record in 380.2_Share_Draft_Dividend_Expense table
+INSERT INTO "380.2_Share_Draft_Dividend_Expense" (DivExpAMT, Date) VALUES (150, '2023-02-22');
+
+-- Updating a record in 380.2_Share_Draft_Dividend_Expense table
+UPDATE "380.2_Share_Draft_Dividend_Expense" SET DivExpAMT = 300 WHERE DivExpAMT = 150;
+
+-- Inserting a record in 380.3_Club_Account_Dividend_Expense table
+INSERT INTO "380.3_Club_Account_Dividend_Expense" (DivExpAMT, Date) VALUES (75, '2023-02-22');
+
+-- Updating a record in 380.3_Club_Account_Dividend_Expense table
+UPDATE "380.3_Club_Account_Dividend_Expense" SET DivExpAMT = 150 WHERE DivExpAMT = 75;
+
+-- Inserting a record in 380.4_IRA/Keogh_Dividend_Expense table
+INSERT INTO "380.4_IRA/Keogh_Dividend_Expense" (DivExpAMT, Date) VALUES (50, '2023-02-22');
+
+-- Updating a record in 380.4_IRA/Keogh_Dividend_Expense table
+UPDATE "380.4_IRA/Keogh_Dividend_Expense" SET DivExpAMT = 100 WHERE DivExpAMT = 50;
+
+-- Inserting a record in 380.5_Share_Certificate_Dividend_Expense table
+INSERT INTO "380.5_Share_Certificate_Dividend_Expense" (DivExpAMT, Date) VALUES (125, '2023-02-22');
+
+-- Updating a record in 380.5_Share_Certificate_Dividend_Expense table
+UPDATE "380.5_Share_Certificate_Dividend_Expense" SET DivExpAMT = 250 WHERE DivExpAMT = 125;
+
+-- Inserting a record in 380.6_Money_Market_Dividend_Expense table
+INSERT INTO "380.6_Money_Market_Dividend_Expense" (DivExpAMT, Date) VALUES (80, '2023-02-22');
+
+-- Updating a record in 380.6_Money_Market_Dividend_Expense table
+UPDATE "380.6_Money_Market_Dividend_Expense" SET DivExpAMT = 160 WHERE DivExpAMT = 80;
+
+-- Inserting a record in 380.7_Other_Dividend_Expense table
+INSERT INTO "380.7_Other_Dividend_Expense" (DivExpAMT, Date) VALUES (200, '2023-02-22');
+
+-- Updating a record in 380.7_Other_Dividend_Expense table
+UPDATE "380.7_Other_Dividend_Expense" SET DivExpAMT = 400 WHERE DivExpAMT = 200;
+
+-- Inserting a record in 385_Interest_on_Deposits table
+INSERT INTO "385_Interest_on_Deposits" (DivExpAMT, Date) VALUES (300, '2023-02-22');
+
+-- Updating a record in 385_Interest_on_Deposits table
+UPDATE "385_Interest_on_Deposits" SET DivExpAMT = 600 WHERE DivExpAMT = 300;
+
+
+CREATE VIEW "400_Non-Operating_Income_(Expense)" AS 
+SELECT SUM("NonOpIncomeExpAMT") AS "TotalNonOpIncomeExpAMT" 
+FROM "410_Non-Operating_Income_(Expense)";
+
+INSERT INTO "410_Non-Operating_Income_(Expense)" ("NonOpIncomeExpAMT", "Date") 
+VALUES (5000, '2022-01-01');
+
+UPDATE "410_Non-Operating_Income_(Expense)" 
+SET "NonOpIncomeExpAMT" = 6000, "Date" = '2022-02-01'
+WHERE "NonOpIncomeExpAMT" = 5000;
+
+
+CREATE VIEW 420_Gain_(Loss)_on_Investments AS
+SELECT SUM(GainLossInvestAMT) AS TotalGainLossInvestAMT
+FROM 421_Gain_(Loss)_on_Investments;
+
+INSERT INTO 421_Gain_(Loss)_on_Investments (GainLossInvestAMT, Date) VALUES (1000.00, '2022-01-01');
+
+
+UPDATE 421_Gain_(Loss)_on_Investments
+SET GainLossInvestAMT = 1500.00, Date = '2022-02-01'
+WHERE ID = 1;
+
+CREATE VIEW 430_Gain_(Loss)_on_Disposition_of_Assets AS
+SELECT SUM(GainLossDispoAssetsAMT) as TotalGainLoss
+FROM 431_Gain_(Loss)_on_Disposition_of_Assets;
+
+INSERT INTO 431_Gain_(Loss)_on_Disposition_of_Assets (GainLossDispoAssetsAMT, Date)
+VALUES (1000, '2022-01-01');
+
+
+UPDATE 431_Gain_(Loss)_on_Disposition_of_Assets
+SET GainLossDispoAssetsAMT = 2000, Date = '2022-02-01'
+WHERE id = 1;
+
+
+CREATE VIEW 440_Other_Non-Operating_Income_(Expense) AS 
+SELECT SUM(OtherNonOpIncomeExpAMT) as Total_OtherNonOpIncomeExpAMT
+FROM 441_Other_Non-Operating_Income_(Expense);
+
+INSERT INTO 441_Other_Non-Operating_Income_(Expense) (OtherNonOpIncomeExpAMT, Date) 
+VALUES (1000, '2022-01-01');
+
+
+UPDATE 441_Other_Non-Operating_Income_(Expense) 
+SET OtherNonOpIncomeExpAMT = 2000, Date = '2022-02-01'
+WHERE id = 1;
+
+
+CREATE VIEW 446_Extraordinary_Gains_and_Losses AS
+SELECT SUM(ExtraordinaryGainLossAMT) AS TotalExtraordinaryGainLossAMT
+FROM "446.1_Extraordinary_Gains_and_Losses";
+
+INSERT INTO "446.1_Extraordinary_Gains_and_Losses" (ExtraordinaryGainLossAMT) VALUES (5000);
+
+UPDATE "446.1_Extraordinary_Gains_and_Losses"
+SET ExtraordinaryGainLossAMT = 6000, Date = '2023-02-22'
+WHERE ID = 1;
